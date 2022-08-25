@@ -16,7 +16,16 @@ router.post('/add/image', (req, res) => {
 
     connection.query(sql,{image: req.body.image}, (error) => {
         if (error) {throw error}
-        else{ res.status(200).json('image posted!') }
+        else{ res.status(200).json({ success: true, message: 'Image posted succesfull!' }) }
+    })
+})
+
+router.delete('/delete/image/:id', (req, res) => {
+    const sql = `DELETE FROM Gallery where id = ${req.params.id}`
+
+    connection.query(sql, (error) => {
+        if(error) {throw error}
+        else{ res.status(200).json({ success: true, message: 'Image deleted succesfull!' }) }
     })
 })
 
